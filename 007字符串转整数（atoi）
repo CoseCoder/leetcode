@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int myAtoi(string str) {
+       long long res = 0;
+		int len = str.size(), index = 0;
+		bool valid = false;
+		while (index < len&&str[index] == ' ') {
+			index++;
+		}
+		if (index >= len)
+			return 0;
+		bool minus = str[index] ^ '-' ? false : true;
+		if (str[index] == '+'||minus)
+			index++;
+		while (index < len&&str[index] >= '0'&&str[index] <= '9') {
+			valid = true;
+			res = res * 10 + str[index] - '0';
+			index++;
+			if (res > INT_MAX && !minus)
+				return INT_MAX;
+			else if (minus&&-res < INT_MIN)
+				return INT_MIN;
+		}
+		if (!valid)
+			return 0;
+		if (minus)
+			res = -res;
+		return res;
+    }
+};
