@@ -1,0 +1,35 @@
+class Solution {
+public:
+    map<int, int> s[10];
+	bool isValidSquare(int i, int j, int x) {
+		int r = i / 3 * 3, c = j / 3 * 3;
+		auto it = s[x].find((i + 1) % 3 + r);
+		if (it != s[x].end() && it->second - c < 3&&it->second - c>=0)
+			return false;
+		it = s[x].find((i + 2) % 3 + r);
+		if (it != s[x].end() && it->second - c < 3&&it->second - c>=0)
+			return false;
+		return true;
+	}
+	bool isValidSudoku(vector<vector<char>>& board) {
+		int row[10][10] = {}, col[10][10] = {};
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				char c = board[i][j];
+				if (c != '.') {
+					int x = c - '0';
+					row[x][i]++;
+					col[x][j]++;
+					if (row[x][i] > 1 || col[x][j] > 1)
+						return false;
+					else {
+						if (!isValidSquare(i, j, x))
+							return false;
+						s[x][i]=j;
+					}
+				}
+			}
+		}
+		return true;
+	}
+};
