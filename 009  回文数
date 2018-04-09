@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int reverseNonnegetiveNumber(int x) {              
+        long res=0;
+        while(x>0){
+            res=res*10+x%10;
+            x/=10;
+        }
+        if(res>INT_MAX)
+            return -1;
+        return res;
+    }
+    bool isPalindrome(int x) {
+        int res=reverseNonnegetiveNumber(x);
+        if(x<0||res<0)
+            return false;
+        if(x==res)
+            return true;
+        return false;
+    }
+};
