@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        const int T = 128;
+		int hashTable[T];
+		int maxLength = 0, idx = -1,right=0;		
+        memset(hashTable, -1, sizeof(hashTable));	
+        if(s.length()==0)
+            return 0;
+		while (right<s.length())
+		{		
+            char c=s[right];
+            if(hashTable[c]>idx)
+                idx=hashTable[c];
+            maxLength=maxLength>right-idx?maxLength:right-idx;
+			hashTable[c]=right++;
+		}
+		return maxLength;
+    }
+};
