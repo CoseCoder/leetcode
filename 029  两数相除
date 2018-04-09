@@ -1,0 +1,41 @@
+class Solution {
+public:
+	int divide(int dividend, int divisor) {
+		long long divid = dividend, divi = divisor;
+		if (!divi)
+			return INT_MAX;
+		if (divi == 1) {		
+			return divid;
+		}
+		if (divi == -1) {
+			if (divid == INT_MIN)
+				return INT_MAX;
+			else
+				return -divid;
+		}
+		bool s = 0;
+		if (divid<0 && divi>0)
+			divid = -divid;
+		else if (divid >= 0 && divi<0)
+			divi = -divi;
+		else if (divid<0) {
+			divid = -divid;
+			divi = -divi;
+			s = 1;
+		}
+		else
+			s = 1;
+		long long res = 0, i = 1, temp;
+		while (divid >= divi) {
+			temp = divi;
+			i = 1;
+			while (divid>=temp) {
+				i <<= 1;
+				temp <<= 1;
+			}
+			divid -= (temp>>1);
+			res += (i>>1);
+		}
+		return s ? res : -res;
+	}
+};
