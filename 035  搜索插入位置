@@ -1,0 +1,17 @@
+class Solution {
+public:
+     int binarySR(vector<int>& nums,int l,int r,int target){
+        if(l>r)
+            return l;
+        int mid=(l+r)>>1;
+        if(nums[mid]==target)
+            return mid;
+        if(nums[mid]<target)
+            return binarySR(nums,mid+1,r,target);
+        else
+            return binarySR(nums,l,mid-1,target);
+    }   
+    int searchInsert(vector<int>& nums, int target) {      
+        return binarySR(nums,0,nums.size()-1,target);
+    }
+};
