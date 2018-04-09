@@ -1,0 +1,29 @@
+class Solution {
+public:
+   void getString(vector<string> &res, const string &digits, string s) {
+		int i = s.length();
+		char c = digits[i] > '7' ? (digits[i] - '2') * 3 + 'b' : (digits[i] - '2') * 3 + 'a';
+		int count = digits[i] == '7' || digits[i] == '9' ? 4 : 3;
+		s.push_back(c);
+		if (i == digits.length() - 1) {
+			for (int j = 0; j < count; j++) {
+				res.push_back(s);
+				s[i]++;
+			}
+			return;
+		}
+		for (int j = 0; j < count; j++) {
+			getString(res, digits, s);
+			s[i]++;
+		}
+	}
+	vector<string> letterCombinations(string digits) {
+		int length = digits.length();
+		vector<string> res;
+		if (length < 1)
+			return res;
+		string s;
+		getString(res, digits, s);
+		return res;
+	}
+};
