@@ -1,0 +1,23 @@
+class Solution {
+public:   
+    void getRR(vector<vector<int>> &res,vector<int>& candidates,int i,int target,int sum,vector<int> curr){
+        if(sum==target){
+            res.push_back(curr);
+            return;
+        }
+        if(i==candidates.size()||target-sum<candidates[i])
+            return;
+        int x=candidates[i];
+        int c=(target-sum)/x;
+        for(int j=0;j<=c;j++){
+            getRR(res,candidates,i+1,target,sum+j*x,curr);
+            curr.push_back(x);            
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> res;
+        sort(candidates.begin(),candidates.end());
+        getRR(res,candidates,0,target,0,vector<int>());
+       return res;
+    }
+};
