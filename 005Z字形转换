@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(numRows<2)
+            return s;
+        string res;
+        int inc=(numRows-1)<<1;
+        for(int i=0;i<numRows;i++){
+            if(i==0||i==numRows-1){
+                for(int j=0;i+j<s.length();j+=inc){
+                    res.push_back(s[i+j]);
+                }
+            }else{
+                for(int j=0;i+j<s.length();j+=inc){
+                    res.push_back(s[i+j]);
+                    int index=j+inc-i;
+                    if(index<s.length())
+                    res.push_back(s[index]);
+                }
+            }
+        }
+        return res;
+    }
+};
