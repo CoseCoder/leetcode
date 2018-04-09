@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        vector<int> res;        
+        if(words.empty())
+            return res;
+        int sl=s.length();
+        unordered_map<string, int> m1;
+        for(string &a:words)
+            ++m1[a];
+        int c=words[0].length(),n=words.size();        
+        for(int i=0;i<=sl-n*c;i++){
+            unordered_map<string, int> m2;
+            int j;
+            for(j=i;j<sl;j+=c){
+                string t=s.substr(j,c);
+                if(m1.find(t)==m1.end())
+                    break;
+                ++m2[t];
+                if(m2[t]>m1[t])
+                   break;
+            }       
+            if(j==n*c+i)
+                res.push_back(i);
+        }
+        return res;
+    }
+};
