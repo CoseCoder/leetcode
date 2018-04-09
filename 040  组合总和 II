@@ -1,0 +1,22 @@
+class Solution {
+public:
+     void dfs(vector<vector<int>> &res,vector<int>& candidates,int i,int target,int sum,vector<int> curr){
+        if(sum==target){
+            if(res.empty()||res[res.size()-1]!=curr)
+                res.push_back(curr);
+            return;
+        }
+        if(i==candidates.size()||target-sum<candidates[i])
+            return;     
+        if(curr.empty()||curr[curr.size()-1]!=candidates[i])
+            dfs(res,candidates,i+1,target,sum,curr);
+        curr.push_back(candidates[i]);
+        dfs(res,candidates,i+1,target,sum+candidates[i],curr);     
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {        
+        vector<vector<int>> res;
+        sort(candidates.begin(),candidates.end());
+        dfs(res,candidates,0,target,0,vector<int>());      
+        return res;
+    }
+};
