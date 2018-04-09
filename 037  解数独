@@ -1,0 +1,47 @@
+class Solution {
+public:
+    	bool finish;
+	void dfs(vector<vector<char>>& board, int i, int j) {
+	if (finish)
+			return;
+		if (j > 8) {
+			j = 0;
+			i++;
+		}
+		if (i > 8) {
+			finish = true;
+			return;
+		}
+		if (board[i][j] != '.') {
+			dfs(board, i, j + 1);
+			return;
+		}
+		int r = i / 3 * 3, c = j / 3 * 3;
+		bool s[10]={};
+		for (int k = 0; k < 9; k++) {
+			if (board[i][k] != '.')
+				s[board[i][k]-'0']=1;
+			if (board[k][j] != '.')
+				s[board[k][j]-'0']=1;
+		}
+		for (int m = 0; m < 3; m++) {
+			for (int n = 0; n < 3; n++) {
+				if (board[r + m][c + n] != '.')
+					s[board[r + m][c + n]-'0']=1;
+			}
+		}
+	for(int m=1;m<10;m++){
+        if(s[m]==1)
+            continue;
+			board[i][j] = '0'+m;
+			dfs(board, i, j + 1);
+			if (finish)
+				return;
+			board[i][j] = '.';			
+        }
+	}
+	void solveSudoku(vector<vector<char>>& board) {
+		finish = false;
+		dfs(board, 0, 0);
+	}
+};
