@@ -6,12 +6,6 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-static const auto __ = []()
-{
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
-	return nullptr;
-}();
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
