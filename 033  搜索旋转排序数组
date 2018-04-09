@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int f;
+    int binarySR(vector<int>& nums,int l,int r,int target){
+        if(l>r||f!=-1)
+            return -1;
+        int mid=(l+r)>>1;
+        if(nums[mid]==target){
+            f=mid;
+            return mid;       
+        }        
+        return max(binarySR(nums,l,mid-1,target),binarySR(nums,mid+1,r,target));
+    }
+    int search(vector<int>& nums, int target) {
+        f=-1;
+        return binarySR(nums,0,nums.size()-1,target);
+    }
+};
