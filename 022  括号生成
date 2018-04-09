@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void generateParenthesisR(vector<string> &res,string s,int i,int l,int r,int n){
+        if(i==2*n-1)
+            res.push_back(s);
+        i++;
+        if(l<n){
+            s[i]='(';
+            generateParenthesisR(res,s,i,l+1,r,n);
+        }
+        if(l>r){
+            s[i]=')';
+            generateParenthesisR(res,s,i,l,r+1,n);
+        }
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        int l=2*n;
+        string s(l,'(');
+        l--;
+        s[l]=')';
+        generateParenthesisR(res,s,0,1,0,n);
+        return res;
+    }
+};
